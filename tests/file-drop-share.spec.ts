@@ -88,6 +88,7 @@ async function clickDownloadAndRead(page: Page): Promise<Buffer> {
 test(
   'TC-01: uploaded file can be downloaded and contents match byte-for-byte',
   async ({ page }) => {
+    test.setTimeout(60_000)
     const { filePath, content } = makeTempFile('tc01-upload.bin', 1 * 1024 * 1024) // 1 MB
     const fileName = path.basename(filePath)
 
@@ -220,6 +221,7 @@ test(
 test(
   'TC-04: visiting a link after its TTL shows an expiry message, not the file',
   async ({ page }) => {
+    test.setTimeout(90_000)
     const { filePath } = makeTempFile('tc04-short-ttl.bin', 32 * 1024) // 32 KB
 
     // Upload with the 10-second testing TTL

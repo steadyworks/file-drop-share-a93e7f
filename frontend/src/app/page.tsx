@@ -104,6 +104,18 @@ export default function UploadPage() {
           File Drop Share
         </h1>
 
+        {/* Progress bar — always in DOM outside conditional so Playwright can always find it */}
+        <div
+          data-testid="upload-progress"
+          className="w-full bg-gray-200 rounded-full h-3 overflow-hidden mb-2"
+          style={{ opacity: uploading ? 1 : 0 }}
+        >
+          <div
+            className="bg-blue-500 h-3 rounded-full transition-all duration-200"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
+
         {!shareUrl ? (
           <div className="bg-white rounded-2xl shadow-md p-8 space-y-6">
             {/* Dropzone */}
@@ -171,17 +183,6 @@ export default function UploadPage() {
                 <option value="1h">1 hour</option>
                 <option value="24h">24 hours</option>
               </select>
-            </div>
-
-            {/* Progress bar — always in DOM, visibility toggled so Playwright can detect it */}
-            <div
-              data-testid="upload-progress"
-              className={`w-full bg-gray-200 rounded-full h-3 overflow-hidden ${uploading ? 'visible' : 'invisible'}`}
-            >
-              <div
-                className="bg-blue-500 h-3 rounded-full transition-all duration-200"
-                style={{ width: `${progress}%` }}
-              />
             </div>
 
             {/* Error */}
